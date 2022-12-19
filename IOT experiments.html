@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IOT experiments.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div align = 'center'>
+<h1 id="assignment---iot-experiments">Assignment - IOT Experiments</h1>
+<h3 id="bishwajit-kumar-poddar"><strong>Bishwajit Kumar Poddar</strong></h3>
+<h4 id="msc-mi"><strong>Msc MI</strong></h4>
+<h4 id="roll---211110"><strong>Roll - 211110</strong></h4>
+<hr>
+</div>
+<ol>
+<li>Configure Raspberry Pi on the system and explore its GUI</li>
+<li>Get Values for IR,  LDR, PIR, UltraSonic, Rain, and  Sound sensors using Raspberry.</li>
+<li>Uploading values of IoT sensors in the Cloud</li>
+<li>Implement IoT Core service to deploy sensor values on AWS Cloud.</li>
+<li>Establish wireless communication between 2 Raspberry pi using NRF and Bluetooth modules.</li>
+<li>Establish Wireless communication between 2 Arduinos using NRF and Bluetooth modules.</li>
+<li>Establishing client server communication</li>
+<li>Sniffing messages communicated between client and server</li>
+<li>Configure ESP8266 using Aurdino IDE and configure GPIOs to Run the Hellp World Program ( Using LED )</li>
+<li>Configure ESP8266 using Aurdino IDE and display characters in the Seven Segment Display.</li>
+</ol>
+<hr>
+<h1 id="configure-raspberry-pi-on-the-system-and-explore-its-gui">Configure Raspberry Pi on the system and explore its GUI</h1>
+<ul>
+<li>To setup raspberry pi we need to flash official / arm images to raspberry. To do so, we can use the raspberry pi imager which is a cloned tool of etcher. It will download the raspberry pi image and flash it to the microsd card which will be used to boot Raspberry pie.</li>
+</ul>
+<p><img src="https://assets.raspberrypi.com/static/md-bfd602be71b2c1099b91877aed3b41f0.png" alt="Raspberry pi image">
+<em>Figure: Raspberry pi imager</em></p>
+<ul>
+<li>
+<p>Choose the OS that you want to run on raspberry pi. And choose the storage which is the microsd card which will be inserted. after selecting click on write and image will be written to the micro-sd card. Just plug the micro-sd to raspberry pi and give power and it will boot on will show raspberry OS booting screen.</p>
+</li>
+<li>
+<p>Explore the OS. Open terminal and use <code>apt update</code> command to update the libraries.</p>
+</li>
+</ul>
+<br>
+<br>
+<h1 id="get-values-for-ir-ldr-pir-ultrasonic-rain-and-sound-sensors-using-raspberry">Get Values for IR,  LDR, PIR, UltraSonic, Rain, and  Sound sensors using Raspberry.</h1>
+<ol>
+<li>
+<h1 id="ir">IR</h1>
+<ul>
+<li>This sensor emits IR beam and in return senses the light which is bouncing back to it.</li>
+<li>If a object is close enough then this sensor can detect the object and set -off alarm. But for this experiment the python code only gives a bash output.</li>
+</ul>
+<p><em><strong>Souce Code</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> RPi.GPIO <span class="hljs-keyword">as</span> GPIO
+<span class="hljs-keyword">import</span> time
+
+sensor = <span class="hljs-number">16</span>
+<span class="hljs-comment">#buzzer = 18</span>
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(sensor,GPIO.IN)
+<span class="hljs-comment">#GPIO.setup(buzzer,GPIO.OUT)</span>
+
+<span class="hljs-comment">#GPIO.output(buzzer,False)</span>
+print(<span class="hljs-string">"IR Sensor Ready....."</span>)
+print(<span class="hljs-string">" "</span>)
+
+
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> GPIO.input(sensor):
+    <span class="hljs-comment">#print(GPIO.input(sensor))</span>
+    <span class="hljs-comment">#GPIO.output(buzzer,True)</span>
+    
+    print(<span class="hljs-string">"Object Detected"</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">"Object not Deteceted"</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+
+</div></code></pre>
+</li>
+<li>
+<h1 id="ldr">LDR</h1>
+<ul>
+<li>Light sensor detects light and give output as binary if its bright or not.</li>
+</ul>
+<p><em><strong>Source Code</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> RPi.GPIO <span class="hljs-keyword">as</span> GPIO
+<span class="hljs-keyword">import</span> time
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(<span class="hljs-literal">False</span>)
+LIGHT_PIN = <span class="hljs-number">24</span>
+GPIO.setup(LIGHT_PIN, GPIO.IN)
+lOld =  <span class="hljs-keyword">not</span> GPIO.input(LIGHT_PIN)
+print(<span class="hljs-string">'Starting up the LIGHT Module (click on STOP to exit)'</span>)
+time.sleep(<span class="hljs-number">0.2</span>)
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    <span class="hljs-keyword">if</span> GPIO.input(LIGHT_PIN) &lt;= <span class="hljs-number">10</span>:
+        <span class="hljs-keyword">if</span> GPIO.input(LIGHT_PIN):
+        <span class="hljs-keyword">print</span> (<span class="hljs-string">'\u263e'</span>)
+        <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">print</span> (<span class="hljs-string">'\u263c'</span>)
+    lOld = GPIO.input(LIGHT_PIN)
+    time.sleep(<span class="hljs-number">0.2</span>)
+</div></code></pre>
+</li>
+<li>
+<h1 id="pir">PIR</h1>
+<ul>
+<li>its senses movement in the environment using IR data.</li>
+</ul>
+<p><em><strong>Source Code</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> RPi.GPIO <span class="hljs-keyword">as</span> GPIO
+<span class="hljs-keyword">import</span> time
+GPIO.setwarnings(<span class="hljs-literal">False</span>)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(<span class="hljs-number">11</span>, GPIO.IN)         <span class="hljs-comment">#Read output from PIR motion sensor</span>
+GPIO.setup(<span class="hljs-number">3</span>, GPIO.OUT)         <span class="hljs-comment">#LED output pin</span>
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    i=GPIO.input(<span class="hljs-number">11</span>)
+    <span class="hljs-keyword">if</span> i==<span class="hljs-number">0</span>:                 <span class="hljs-comment">#When output from motion sensor is LOW</span>
+        print(<span class="hljs-string">"No intruders"</span>,i)
+        GPIO.output(<span class="hljs-number">3</span>, <span class="hljs-number">0</span>)  <span class="hljs-comment">#Turn OFF LED</span>
+        time.sleep(<span class="hljs-number">0.1</span>)
+    <span class="hljs-keyword">elif</span> i==<span class="hljs-number">1</span>:               <span class="hljs-comment">#When output from motion sensor is HIGH</span>
+        print(<span class="hljs-string">"Intruder detected"</span>,i)
+        GPIO.output(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>)  <span class="hljs-comment">#Turn ON LED</span>
+        time.sleep(<span class="hljs-number">0.1</span>)
+</div></code></pre>
+</li>
+<li>
+<h1 id="ultrasonic">UltraSonic</h1>
+<ul>
+<li>For this experiment we were given ultrasonic sensor and resistors to calculate the distance from sensor to any object.
+<ul>
+<li>Ultrasonic send a sound signal.</li>
+<li>It bounces from the object.</li>
+<li>From the time the sound wave came back we calculate the    distance</li>
+</ul>
+</li>
+</ul>
+<p><em><strong>Source Code</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> RPi.GPIO <span class="hljs-keyword">as</span> GPIO
+<span class="hljs-keyword">import</span> time
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO_TRIGGER = <span class="hljs-number">18</span>
+GPIO_ECHO = <span class="hljs-number">24</span>
+
+GPIO.setup(GPIO_TRIGGER , GPIO.OUT)
+GPIO.setup(GPIO_ECHO, GPIO.IN)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">distance</span><span class="hljs-params">()</span>:</span>
+    GPIO.output(GPIO_TRIGGER, <span class="hljs-literal">True</span> )
+    time.sleep(<span class="hljs-number">0.00001</span>)
+    GPIO.output(GPIO_TRIGGER, <span class="hljs-literal">False</span> )
+    
+    starttime = time.time()
+    stoptime = time.time()
+    
+    <span class="hljs-keyword">while</span> GPIO.input(GPIO_ECHO)==<span class="hljs-number">0</span>:
+        starttime = time.time()
+    
+    <span class="hljs-keyword">while</span> GPIO.input(GPIO_ECHO)==<span class="hljs-number">1</span>:
+        stoptime = time.time()
+    
+    timeescaped = stoptime - starttime
+    
+    distance = (timeescaped * <span class="hljs-number">34300</span>) /<span class="hljs-number">2</span>
+    <span class="hljs-keyword">return</span> distance
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+            dist = distance()
+            print(<span class="hljs-string">f'Measured distance = <span class="hljs-subst">{round(dist)}</span>'</span>)
+            <span class="hljs-comment"># add the requets code here + imported</span>
+            time.sleep(<span class="hljs-number">0.2</span>)
+        
+    <span class="hljs-keyword">except</span> KeyboardInterrupt:
+        print(<span class="hljs-string">'why you stopped ???????????????????'</span>)
+        GPIO.cleanup()
+</div></code></pre>
+</li>
+<li>
+<h1 id="rain-sensor">Rain Sensor</h1>
+<ul>
+<li>This sensor uses a simple circuit with many iron plates with minimum distance. if a water drops fall on the plate then its connects the circuit and thus gives a positive result. As water with minerals are good conductors of electricity. Water used in this filtered water (regular drinking )</li>
+</ul>
+<p><em><strong>Source Code</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep
+<span class="hljs-keyword">from</span> gpiozero <span class="hljs-keyword">import</span> Buzzer, InputDevice
+
+<span class="hljs-comment">#buzz	= Buzzer(13)</span>
+no_rain = InputDevice(<span class="hljs-number">18</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">buzz_now</span><span class="hljs-params">(iterations)</span>:</span>
+    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(iterations):
+        <span class="hljs-comment">#buzz.on()</span>
+        sleep(<span class="hljs-number">0.1</span>)
+        buzz.off()
+        sleep(<span class="hljs-number">0.1</span>)
+
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> no_rain.is_active:
+        print(<span class="hljs-string">"It's raining - get the washing in!"</span>)
+        <span class="hljs-comment">#buzz_now(5)</span>
+        <span class="hljs-comment"># insert your other code or functions here</span>
+        <span class="hljs-comment"># e.g. tweet, SMS, email, take a photo etc.</span>
+    sleep(<span class="hljs-number">1</span>)
+</div></code></pre>
+<p><em>i.e. The buzz codes are commented out as we were not given any buzzer. But pin 13 can be used for that as per the code</em></p>
+</li>
+<li>
+<h1 id="sound-sensor">Sound Sensor</h1>
+<ul>
+<li>Detects the noise in the environment and eleminates the background noise from there it gives any noise greater than the ambient noise.</li>
+</ul>
+<p><em><strong>Source Code</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-comment">#!/usr/bin/python</span>
+<span class="hljs-keyword">import</span> RPi.GPIO <span class="hljs-keyword">as</span> GPIO
+<span class="hljs-keyword">import</span> time
+
+<span class="hljs-comment">#GPIO SETUP</span>
+channel = <span class="hljs-number">17</span>
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(channel, GPIO.IN)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">callback</span><span class="hljs-params">(channel)</span>:</span>
+    <span class="hljs-keyword">if</span> GPIO.input(channel):
+            <span class="hljs-keyword">print</span> <span class="hljs-string">"Sound Detected!"</span>
+    <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">print</span> <span class="hljs-string">"Sound Detected!"</span>
+
+GPIO.add_event_detect(channel, GPIO.BOTH, bouncetime=<span class="hljs-number">300</span>)  <span class="hljs-comment"># let us know when the pin goes HIGH or LOW</span>
+GPIO.add_event_callback(channel, callback)  <span class="hljs-comment"># assign function to GPIO PIN, Run function on change</span>
+
+<span class="hljs-comment"># infinite loop</span>
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        time.sleep(<span class="hljs-number">1</span>)
+</div></code></pre>
+</li>
+</ol>
+<h1 id="uploading-values-of-iot-sensors-in-the-cloud">Uploading values of IoT sensors in the Cloud</h1>
+<ul>
+<li>
+<p>To upload the values we will the basic http model of Request Reponse model
+<img src="https://www.researchgate.net/publication/311571526/figure/fig3/AS:438170157359106@1481479314691/HTTP-request-response-model.png" alt="Request Response model">
+<em>Figure basic Request Response Model</em></p>
+</li>
+<li>
+<p>To achive this we will use a simple python library which comes with preinstalled http request reponse model as a web framework.</p>
+</li>
+<li>
+<p>Create simple web url in flask app which can access the post requests made by the IOT devices and give positive reponse.</p>
+</li>
+</ul>
+<p><em><strong>Python flask webframework code</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask,request,jsonify,render_template,redirect
+
+app = Flask(__name__)
+gloabl_variable = <span class="hljs-number">0</span>
+
+<span class="hljs-meta">@app.route("/")</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">'/multidata'</span>)
+    <span class="hljs-comment"># return render_template('auto_update.html')</span>
+
+<span class="hljs-meta">@app.route('/get_multiple_data')</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_multidata</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> jsonify(datas[::<span class="hljs-number">-1</span>])
+
+<span class="hljs-meta">@app.route('/multidata')</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">multidata</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">'multiple_ready.html'</span>)
+
+<span class="hljs-meta">@app.route('/set_data',methods=['GET','POST'])</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_data</span><span class="hljs-params">()</span>:</span>
+    print(request.args.to_dict())
+    <span class="hljs-keyword">global</span> gloabl_variable
+    gloabl_variable = request.args.get(<span class="hljs-string">'distance'</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'thank you'</span>
+
+<span class="hljs-keyword">if</span> __name__==<span class="hljs-string">'__main__'</span>:
+    app.run(host=<span class="hljs-string">'0.0.0.0'</span>,debug= <span class="hljs-literal">True</span>)
+</div></code></pre>
+<blockquote>
+<p>Here the template that is renders</p>
+</blockquote>
+<p><em><strong>basic html page syntax</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"IE=edge"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Auto update page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">center</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Distance<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">id</span> = <span class="hljs-string">'rondechaka'</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">center</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+
+        <span class="hljs-keyword">var</span> element = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"rondechaka"</span>); 
+        setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ 
+            fetch(<span class="hljs-string">'get_data'</span>)
+                .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.json())
+                .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> element.innerHTML=data.distance)
+        }, <span class="hljs-number">500</span>);
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<ul>
+<li>Host this in the AWS EC2 server</li>
+<li>use the amazon ec2 server ip address to post the data from IOT using requests module.</li>
+</ul>
+<p><em><strong>Example request module code</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> random
+<span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>):
+    x = requests.get(<span class="hljs-string">f'http://10.10.27.169:5000/set_data?distance=<span class="hljs-subst">{random.randint(<span class="hljs-number">0</span>,<span class="hljs-number">99</span>)}</span>'</span>)
+    print(x)
+    time.sleep(<span class="hljs-number">1</span>)
+</div></code></pre>
+<h1 id="implement-iot-core-service-to-deploy-sensor-values-on-aws-cloud">Implement IoT Core service to deploy sensor values on AWS Cloud</h1>
+<ul>
+<li>
+<p>For this experiment we'll be using MQTT. MQTT is a lightweight, publish-subscribe, machine to machine network protocol for Message queue/Message queuing service. It is designed for connections with remote locations that have devices with resource constraints or limited network bandwidth.</p>
+</li>
+<li>
+<p>AWS cloud give IoT core option and MQTT service with free SSL encryption support.</p>
+</li>
+<li>
+<p>First go to <code>aws.amazon.com</code>
+<img src="./screenshots/Screenshot 2022-12-17 at 18-22-47 AWS Management Console.png" alt="amazon website">
+<em>Figure: AWS home webpage</em></p>
+</li>
+<li>
+<p>From here go to <code>IoT Core</code>
+<img src="./screenshots/Screenshot 2022-12-17 at 18-23-17 AWS IoT.png" alt="amazon Iot core page">
+<em>Figure: IOT core webpage</em></p>
+</li>
+<li>
+<p>From here go to <code>All device &gt; Things</code></p>
+<p><img src="./screenshots/Screenshot 2022-12-17 at 18-23-54 AWS IoT.png" alt="all device things"></p>
+<p><em>Figure: ALl device to things navigator</em></p>
+</li>
+<li>
+<p>click on things and this page will appear
+<img src="./screenshots/Screenshot 2022-12-17 at 18-24-15 AWS IoT - Manage - Things.png" alt="things page">
+<em>Figure: Things page in AWS IoT Core</em></p>
+</li>
+<li>
+<p>Click on create thing and after that this page will appear
+<img src="./screenshots/Screenshot 2022-12-17 at 18-24-26 AWS IoT - Manage - Things - Create things.png" alt="aws create thing page">
+<em>Figure: AWS create thing page with many and single things creation</em></p>
+</li>
+<li>
+<p>Click on next and specify the name
+<img src="./screenshots/Screenshot 2022-12-17 at 18-24-47 AWS IoT - Manage - Things - Create things - Create single thing.png" alt="specify the name"></p>
+<blockquote>
+<p>For my Case I am using <code>ron-raspberry</code>
+<img src="./screenshots/Screenshot 2022-12-17 at 18-25-50 AWS IoT - Manage - Things - Create things - Create single thing.png" alt="name for thing"></p>
+</blockquote>
+</li>
+<li>
+<p>Now in the thing type</p>
+<ul>
+<li>create a thing type
+<img src="./screenshots/Screenshot 2022-12-17 at 18-26-00 AWS IoT - Manage - Things - Create things - Create single thing.png" alt="thing type"></li>
+<li>specify the name as <code>pi</code></li>
+</ul>
+<blockquote>
+<p>Change the thing type if needed in this case we are working with raspberry pi model 4 B</p>
+</blockquote>
+<p><img src="./screenshots/Screenshot 2022-12-17 at 18-26-28 AWS IoT - Manage - Things - Create things - Create single thing.png" alt="pi name in things name"></p>
+</li>
+<li>
+<p>Go to next and you will get a certification generation gateway
+<img src="./screenshots/Screenshot 2022-12-17 at 18-27-47 AWS IoT - Manage - Things - Create things - Create single thing.png" alt="certificate generation"></p>
+</li>
+<li>
+<p>Click on auto generate and go to next
+<img src="./screenshots/Screenshot 2022-12-17 at 18-28-26 AWS IoT - Manage - Things - Create things - Create single thing.png" alt="policy asking"></p>
+</li>
+<li>
+<p>Go to create policy where a new tab will open where you can create the policy and attactch with raspberry pi
+<img src="./screenshots/Screenshot 2022-12-17 at 18-28-56 AWS IoT - Security - Policies - Create policy.png" alt="new page"></p>
+</li>
+<li>
+<p>Give a name for my case I am using <code>ron-raspberry-policy</code>
+<img src="./screenshots/Screenshot 2022-12-17 at 18-29-24 AWS IoT - Security - Policies - Create policy.png" alt="policy creation 1"></p>
+</li>
+<li>
+<p>after that set the polcy action to <code>*</code> and policy resource to <code>*</code>
+<img src="./screenshots/Screenshot 2022-12-17 at 18-32-02 AWS IoT - Security - Policies - Create policy.png" alt="policy action and resource"></p>
+</li>
+<li>
+<p>Now you will see this screen where it confirms policy is created
+<img src="./screenshots/Screenshot 2022-12-17 at 18-32-31 AWS IoT - Security - Policies.png" alt="policy created screen"></p>
+</li>
+<li>
+<p>now close the TAB and go to previous tab where you will find this page
+<img src="./screenshots/Screenshot 2022-12-17 at 18-33-09 AWS IoT - Manage - Things - Create things - Create single thing.png" alt="policy selection"></p>
+</li>
+<li>
+<p>select <code>ron-raspberry-policy</code> and then <code>create thing</code> and you will get this screen
+<img src="./screenshots/Screenshot 2022-12-17 at 18-36-39 AWS IoT - Manage - Things - Create things - Create single thing.png" alt="created thing page "></p>
+</li>
+<li>
+<p>Now as shown download device <code>certificate + Public key + private key</code></p>
+</li>
+<li>
+<p>Then click on <code>Done</code></p>
+</li>
+<li>
+<p>Go to certificates and attach to thing you created.
+<img src="./screenshots/Screenshot 2022-12-17 at 18-39-12 AWS IoT - Security - Certificates.png" alt="certificate page"></p>
+<ul>
+<li>Select action and then select <code>Attatch to a thing</code>
+<img src="./screenshots/Screenshot 2022-12-17 at 18-39-40 AWS IoT - Security - Certificates.png" alt="action"></li>
+<li>Type your thing name select and click on attatch to thing
+<img src="./screenshots/Screenshot 2022-12-17 at 18-40-19 AWS IoT - Security - Certificates.png" alt="attatch"></li>
+</ul>
+</li>
+<li>
+<p>Clone the repo <code>https://github.com/binaryupdates/aws-raspberrypi</code></p>
+</li>
+<li>
+<p>This repo has only this files
+<img src="./screenshots/Screenshot from 2022-12-17 18-42-20.png" alt="screen shot of folder"></p>
+</li>
+<li>
+<p>now COPY the three files here
+<img src="./screenshots/Screenshot from 2022-12-17 18-43-33.png" alt="screen show of folder after copy"></p>
+</li>
+<li>
+<p>Now change the piython.py to this code where change file of certificate and change the of private key</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> paho.mqtt.client <span class="hljs-keyword">as</span> mqtt
+<span class="hljs-keyword">import</span> ssl
+<span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> _thread
+<span class="hljs-keyword">import</span> RPi.GPIO <span class="hljs-keyword">as</span> GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(<span class="hljs-number">21</span>, GPIO.OUT)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">on_connect</span><span class="hljs-params">(client, userdata, flags, rc)</span>:</span>
+    print(<span class="hljs-string">"Connected with result code "</span>+str(rc))
+
+
+client = mqtt.Client()
+client.on_connect = on_connect
+client.tls_set(ca_certs=<span class="hljs-string">'./rootCA.pem'</span>, certfile=<span class="hljs-string">'./28a0b8ae5536ddb6125f5529e2727caa3d9696ae08422b85024ca699588ad0f9-certificate.pem.crt'</span>, keyfile=<span class="hljs-string">'./28a0b8ae5536ddb6125f5529e2727caa3d9696ae08422b85024ca699588ad0f9-private.pem.key'</span>, tls_version=ssl.PROTOCOL_SSLv23)
+client.tls_insecure_set(<span class="hljs-literal">True</span>)
+client.connect(<span class="hljs-string">"a1cqo4hn4vc7c8-ats.iot.ap-southeast-1.amazonaws.com"</span>, <span class="hljs-number">8883</span>, <span class="hljs-number">60</span>) <span class="hljs-comment">#Taken from REST API endpoint - Use your own. </span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">intrusionDetector</span><span class="hljs-params">(Dummy)</span>:</span>
+    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>):
+        x = GPIO.input(<span class="hljs-number">21</span>)
+        <span class="hljs-keyword">if</span>(x==<span class="hljs-number">0</span>): 
+            print(<span class="hljs-string">"Just Awesome"</span>) 
+            client.publish(<span class="hljs-string">"device/data"</span>, payload=<span class="hljs-string">"Hello from BinaryUpdates!!"</span> , qos=<span class="hljs-number">0</span>, retain=<span class="hljs-literal">False</span>)
+        time.sleep(<span class="hljs-number">5</span>)
+
+_thread.start_new_thread(intrusionDetector,(<span class="hljs-string">"Create intrusion Thread"</span>,))
+    
+client.loop_forever()
+</div></code></pre>
+<blockquote>
+<p>Here the client.connect URL you can find in the aws its different from others.<br>Go to settings in aws and in the enpoint you will find the url of yours
+<img src="./screenshots/Screenshot 2022-12-17 at 18-46-46 AWS IoT.png" alt="aws settings for endpoint">
+<br>From here you will see this appear
+<img src="./screenshots/Screenshot 2022-12-17 at 18-47-02 AWS IoT - Settings.png" alt="aws end point url">
+<br>Copy the end point and paste in</p>
+</blockquote>
+<pre class="hljs"><code><div>client.connect(<span class="hljs-string">"a1cqo4hn4vc7c8-ats.iot.ap-southeast-1.amazonaws.com"</span>, <span class="hljs-number">8883</span>, <span class="hljs-number">60</span>) <span class="hljs-comment">#Taken from REST API endpoint - Use your own. </span>
+</div></code></pre>
+<ul>
+<li>you need to install paho-mqtt pypi</li>
+</ul>
+<pre class="hljs"><code><div>pip install paho-mqtt
+</div></code></pre>
+<ul>
+<li>run the code and you will see this kind of output</li>
+</ul>
+<pre class="hljs"><code><div>(pt_venv) ron@ron-linux:~/SECONDARY_SSD/GITHUB/aws-raspberrypi$ python3 pipython.py 
+Just Awesome
+Connected with result code 0
+Just Awesome
+Just Awesome
+Just Awesome
+Just Awesome
+Just Awesome
+Just Awesome
+Just Awesome
+Just Awesome
+Just Awesome
+Just Awesome
+</div></code></pre>
+<ul>
+<li>TO if its working go to AWS and click on MQTT Test Client and type the topic name <code>device/data</code> and click on subscribe
+<img src="./screenshots/Screenshot 2022-12-17 at 19-04-03 AWS IoT - MQTT test client.png" alt="topic subscription"></li>
+<li>The output will be like this
+<img src="./screenshots/Screenshot 2022-12-17 at 19-04-14 AWS IoT - MQTT test client.png" alt="output"></li>
+</ul>
+<blockquote>
+<center> IOT message is publishing
+</blockquote>
+<h1 id="establish-wireless-communication-between-2-raspberry-pi-using-nrf-and-bluetooth-modules">Establish wireless communication between 2 Raspberry pi using NRF and Bluetooth modules.</h1>
+<blockquote>
+<p>add data</p>
+</blockquote>
+<h1 id="establish-wireless-communication-between-2-arduinos-using-nrf-and-bluetooth-modules">Establish Wireless communication between 2 Arduinos using NRF and Bluetooth modules.</h1>
+<hr>
+<h3 id="wireless-communication-between-audrino-and-android-mobile-using-blueooth"><strong>Wireless communication between Audrino and Android mobile using blueooth</strong></h3>
+<hr>
+<ul>
+<li>
+<p>For this experiment we have used an arduino to interface a bluetooth device with it. after that connect the bluetooth to mobile and in bluetooth console mobile app, send string data. which will be shown in serial console in arduino.</p>
+<p><em><strong>Source Code</strong></em></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;SoftwareSerial.h&gt;</span></span>
+<span class="hljs-function">SoftwareSerial <span class="hljs-title">EEBlue</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-number">11</span>)</span></span>; <span class="hljs-comment">// RX | TX</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span>
+</span>{
+
+Serial.begin(<span class="hljs-number">9600</span>);
+EEBlue.begin(<span class="hljs-number">9600</span>);  <span class="hljs-comment">//Default Baud for comm, it may be different for your Module.</span>
+Serial.println(<span class="hljs-string">"The bluetooth gates are open.\n Connect to HC-05 from any other bluetooth device with 1234 as pairing key!."</span>);
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span>
+</span>{
+
+<span class="hljs-comment">// Feed any data from bluetooth to Terminal.</span>
+<span class="hljs-keyword">if</span> (EEBlue.available())
+    Serial.write(EEBlue.read());
+
+<span class="hljs-comment">// Feed all data from termial to bluetooth</span>
+<span class="hljs-keyword">if</span> (Serial.available())
+    EEBlue.write(Serial.read());
+}   
+</div></code></pre>
+<blockquote>
+<p>i.e. Used serial write as we can get one line if used serial print ln then each word will take single line in the console.</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="establishing-client-server-communication">Establishing client server communication</h1>
+<ul>
+<li>By using request module in the client side we can establish the connection between server</li>
+<li>For this experiment we can use the client side <code>requests.py</code></li>
+<li>and Server situated in another place.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> random
+<span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>):
+    x = requests.get(<span class="hljs-string">f'http://10.10.27.169:5000/set_data?distance=<span class="hljs-subst">{random.randint(<span class="hljs-number">0</span>,<span class="hljs-number">99</span>)}</span>'</span>)
+    print(x)
+    time.sleep(<span class="hljs-number">1</span>)
+</div></code></pre>
+<hr>
+<h1 id="sniffing-messages-communicated-between-client-and-server">Sniffing messages communicated between client and server</h1>
+<ul>
+<li>For this experiemnt we have used wireshark.
+<ul>
+<li>install wireshark in ubuntu
+<ul>
+<li>Run this commands one by one</li>
+</ul>
+<pre class="hljs"><code><div>sudo add-apt-repository ppa:wireshark-dev/stable
+sudo apt update
+sudo apt install wireshark
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>run wireshark using <code>sudo</code> command<pre class="hljs"><code><div>sudo wireshark
+</div></code></pre>
+</li>
+</ul>
+<p><img src="./screenshots/Screenshot from 2022-12-19 13-38-58.png" alt="images wireshark">
+<em>Figure: wireshark starting screen</em>
+<img src="./screenshots/Screenshot from 2022-12-19 13-39-40.png" alt="image wireshark">
+<em>Figure: Capturing package in wireless card</em></p>
+<ul>
+<li>
+<h2 id="another-way-is-to-use-spacy">another way is to use <code>spacy</code></h2>
+</li>
+<li>
+<p>run this command to install python scapy</p>
+<pre class="hljs"><code><div>sudo apt install python scapy
+</div></code></pre>
+</li>
+<li>
+<p>copy and paste this code</p>
+<pre class="hljs"><code><div><span class="hljs-comment">#!/usr/bin/env python</span>
+<span class="hljs-keyword">import</span> scapy.all <span class="hljs-keyword">as</span> scapy
+<span class="hljs-keyword">import</span> argparse
+<span class="hljs-keyword">from</span> scapy.layers <span class="hljs-keyword">import</span> http
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_interface</span><span class="hljs-params">()</span>:</span>
+    parser = argparse.ArgumentParser()
+    parser.add_argument(<span class="hljs-string">"-i"</span>, <span class="hljs-string">"--interface"</span>, dest=<span class="hljs-string">"interface"</span>, help=<span class="hljs-string">"Specify interface on which to sniff packets"</span>)
+    arguments = parser.parse_args()
+    <span class="hljs-keyword">return</span> arguments.interface
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sniff</span><span class="hljs-params">(iface=None)</span>:</span>
+    scapy.sniff(store=<span class="hljs-literal">False</span>, prn=process_packet)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">process_packet</span><span class="hljs-params">(packet)</span>:</span>
+    <span class="hljs-keyword">if</span> packet.haslayer(http.HTTPRequest):
+        print(<span class="hljs-string">f"[+] Http Request &gt;&gt;   <span class="hljs-subst">{packet[http.HTTPRequest].Host}</span> to destination <span class="hljs-subst">{packet[scapy.IP].src}</span>  port number <span class="hljs-subst">{packet[scapy.TCP].sport}</span> location : <span class="hljs-subst">{packet[http.HTTPRequest].Path}</span>"</span>)
+        <span class="hljs-keyword">if</span> packet.haslayer(scapy.Raw):
+            load = bytes(packet[scapy.Raw].load)
+            print(load)
+            keys = [<span class="hljs-string">"username"</span>, <span class="hljs-string">"password"</span>, <span class="hljs-string">"pass"</span>, <span class="hljs-string">"email"</span>]
+            <span class="hljs-comment"># for key in keys:</span>
+            <span class="hljs-comment">#     if key in load:</span>
+            <span class="hljs-comment">#         print("\n\n\n[+] Possible password/username &gt;&gt; " + load + "\n\n\n")</span>
+            <span class="hljs-comment">#         break</span>
+
+<span class="hljs-comment"># iface = get_interface()</span>
+sniff()
+</div></code></pre>
+</li>
+<li>
+<p>run using <code>sudo</code></p>
+<ul>
+<li>For example</li>
+</ul>
+<pre class="hljs"><code><div>sudo python3 sniffer.py
+</div></code></pre>
+</li>
+</ul>
+<hr>
+<h1 id="configure-esp8266-using-aurdino-ide-and-configure-gpios-to-run-the-hellp-world-program--using-led">Configure ESP8266 using Aurdino IDE and configure GPIOs to Run the Hellp World Program ( Using LED )</h1>
+<ul>
+<li>
+<p>The ESP8266 board comes with built in LED. Which can be used to blink with a delay of 250ms.</p>
+</li>
+<li>
+<p>After connecting the ESP8266 to we need to import/download ESP8266 binaries so that machine can compile the code compatible with the binaries in the ESP8266</p>
+<blockquote>
+<p>The steps the bellow / if already done not needed</p>
+</blockquote>
+<ul>
+<li>COPY the link bellow</li>
+</ul>
+<pre class="hljs"><code><div>http://arduino.esp8266.com/stable/package_esp8266com_index.json
+</div></code></pre>
+<ul>
+<li>Choose Preferences in the File menu and enter the copied code in Additional Board Manager URLs part. Then press OK.
+<img src="https://hackster.imgix.net/uploads/attachments/944045/nod_2_JO1yYH4jJF.png?auto=compress,format&amp;w=680&amp;h=510&amp;fit=max" alt="selection image"></li>
+<li>Search the word ESP8266 in Boards&gt;boards manager from Tools menu. Then install ESP8266 boards. After complete installation, you will see the INSTALLED label on ESP8266 boards.
+<img src="https://hackster.imgix.net/uploads/attachments/944046/nod_1_lVizrFmm5b.png?auto=compress,format&amp;w=680&amp;h=510&amp;fit=max" alt="step 2 above"></li>
+<li>After these two steps, you can see ESP8266 based boards such as NodeMCU in your Arduino IDE boards list, and you can choose your desired board to upload the code.
+<img src="https://hackster.imgix.net/uploads/attachments/944048/screen1_9uHCz1y0zV.jpg?auto=compress,format&amp;w=680&amp;h=510&amp;fit=max" alt="step 2 above"></li>
+<li>Copy and run this simple code in your audrino IDE</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{
+<span class="hljs-comment">// initialize digital pin LED_BUILTIN as an output.</span>
+pinMode(LED_BUILTIN, OUTPUT);
+}
+
+<span class="hljs-comment">// the loop function runs over and over again forever</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{
+digitalWrite(LED_BUILTIN, HIGH);  <span class="hljs-comment">// turn the LED on (HIGH is the voltage level)</span>
+delay(<span class="hljs-number">250</span>);                      <span class="hljs-comment">// wait for a second</span>
+digitalWrite(LED_BUILTIN, LOW);   <span class="hljs-comment">// turn the LED off by making the voltage LOW</span>
+delay(<span class="hljs-number">250</span>);                      <span class="hljs-comment">// wait for a second</span>
+}
+</div></code></pre>
+</li>
+</ul>
+<hr>
+<h1 id="configure-esp8266-using-aurdino-ide-and-display-characters-in-the-seven-segment-display">Configure ESP8266 using Aurdino IDE and display characters in the Seven Segment Display.</h1>
+<hr>
+<ul>
+<li>Connect the seven segment display in this manner
+<img src="https://939506.smushcdn.com/2600043/wp-content/uploads/2/2/1/5/22159166/7-segment-display-with-nodemccu-over-wifi-using-arduino-ide_orig.png?lossy=0&amp;strip=1&amp;webp=1" alt="how to connect seven segment display"></li>
+<li>then run this code</li>
+</ul>
+<p><strong>Source Code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ESP8266WiFi.h&gt;</span></span>
+ 
+<span class="hljs-comment">//const char* ssid = "Your SSID";</span>
+<span class="hljs-comment">//const char* password = "Your Wifi Password";</span>
+
+<span class="hljs-comment">//Seven segment pins attachecd with nodemcu pins  </span>
+<span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>;  <span class="hljs-comment">//Gpio-0 with a of 7 segment display   </span>
+<span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;  <span class="hljs-comment">//Gpio-1 with b of 7 segment display    </span>
+<span class="hljs-keyword">int</span> c = <span class="hljs-number">2</span>;  <span class="hljs-comment">//Gpio-2 with c of 7 segment display  </span>
+<span class="hljs-keyword">int</span> d = <span class="hljs-number">3</span>;  <span class="hljs-comment">//Gpio-3 with d of 7 segment display  </span>
+<span class="hljs-keyword">int</span> e = <span class="hljs-number">4</span>;  <span class="hljs-comment">//Gpio-4 with e of 7 segment display   </span>
+<span class="hljs-keyword">int</span> f = <span class="hljs-number">5</span>;  <span class="hljs-comment">//Gpio-5 with f of 7 segment display  </span>
+<span class="hljs-keyword">int</span> g = <span class="hljs-number">16</span>; <span class="hljs-comment">//Gpio-16 with g of 7 segment display</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-comment">// initialize digital pin LED_BUILTIN as an output.</span>
+  pinMode(a, OUTPUT);
+  pinMode(b, OUTPUT);
+  pinMode(c, OUTPUT);
+  pinMode(d, OUTPUT);
+  pinMode(e, OUTPUT);
+  pinMode(f, OUTPUT);
+  pinMode(g, OUTPUT);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{
+  digitalWrite(a, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(b, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(c, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(d, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(e, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(f, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(g, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a,HIGH);
+  digitalWrite(b,HIGH);
+  digitalWrite(c,HIGH);
+  digitalWrite(d,HIGH);
+  digitalWrite(e,HIGH);
+  digitalWrite(f,HIGH);
+  digitalWrite(g,HIGH);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a, HIGH);
+  digitalWrite(b, HIGH);
+  digitalWrite(c, HIGH);
+  digitalWrite(d, HIGH);       <span class="hljs-comment">//Displaying 1</span>
+  digitalWrite(e, LOW);
+  digitalWrite(f, LOW);
+  digitalWrite(g, HIGH);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a, LOW);
+  digitalWrite(b, LOW);
+  digitalWrite(c, HIGH);      <span class="hljs-comment">//Displaying 2</span>
+  digitalWrite(d, LOW);
+  digitalWrite(e, LOW);
+  digitalWrite(f, HIGH);
+  digitalWrite(g, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a, LOW);
+  digitalWrite(b, LOW);
+  digitalWrite(c, HIGH);      <span class="hljs-comment">//Displaying 2</span>
+  digitalWrite(d, LOW);
+  digitalWrite(e, LOW);
+  digitalWrite(f, HIGH);
+  digitalWrite(g, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a, LOW);
+  digitalWrite(b, LOW);
+  digitalWrite(c, LOW);
+  digitalWrite(d, LOW);      <span class="hljs-comment">//Displaying 3</span>
+  digitalWrite(e, HIGH);
+  digitalWrite(f, HIGH);
+  digitalWrite(g, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a, HIGH);
+  digitalWrite(b, LOW);
+  digitalWrite(c, LOW);
+  digitalWrite(d, HIGH);
+  digitalWrite(e, HIGH);     <span class="hljs-comment">//Displaying 4</span>
+  digitalWrite(f, LOW);
+  digitalWrite(g, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a, LOW);
+  digitalWrite(b, HIGH);
+  digitalWrite(c, LOW);
+  digitalWrite(d, LOW);
+  digitalWrite(e, HIGH);     <span class="hljs-comment">//Displaying 5</span>
+  digitalWrite(f, LOW);
+  digitalWrite(g, LOW);
+  delay(<span class="hljs-number">250</span>);
+   digitalWrite(a, LOW);
+  digitalWrite(b, HIGH);
+  digitalWrite(c, LOW);
+  digitalWrite(d, LOW);    <span class="hljs-comment">//Displaying 6</span>
+  digitalWrite(e, LOW);
+  digitalWrite(f, LOW);
+  digitalWrite(g, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a, LOW);
+  digitalWrite(b, LOW);
+  digitalWrite(c, LOW);
+  digitalWrite(d, HIGH);
+  digitalWrite(e, HIGH);   <span class="hljs-comment">//Displaying 7</span>
+  digitalWrite(f, HIGH);
+  digitalWrite(g, HIGH);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a, LOW);
+  digitalWrite(b, LOW);
+  digitalWrite(c, LOW);
+  digitalWrite(d, HIGH);
+  digitalWrite(e, HIGH);   <span class="hljs-comment">//Displaying 7</span>
+  digitalWrite(f, HIGH);
+  digitalWrite(g, HIGH);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a, LOW);
+  digitalWrite(b, LOW);
+  digitalWrite(c, LOW);
+  digitalWrite(d, HIGH);
+  digitalWrite(e, HIGH);    <span class="hljs-comment">//Displaying 9</span>
+  digitalWrite(f, LOW);
+  digitalWrite(g, LOW);
+  delay(<span class="hljs-number">250</span>);
+  digitalWrite(a,HIGH);
+  digitalWrite(b,HIGH);
+  digitalWrite(c,HIGH);
+  digitalWrite(d,HIGH);
+  digitalWrite(e,HIGH);
+  digitalWrite(f,HIGH);
+  digitalWrite(g,HIGH);
+  delay(<span class="hljs-number">250</span>);
+  
+}
+</div></code></pre>
+
+</body>
+</html>
