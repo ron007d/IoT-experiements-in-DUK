@@ -27,6 +27,7 @@
 
 
 ![Raspberry pi image](https://assets.raspberrypi.com/static/md-bfd602be71b2c1099b91877aed3b41f0.png)
+
 *Figure: Raspberry pi imager*
 
 - Choose the OS that you want to run on raspberry pi. And choose the storage which is the microsd card which will be inserted. after selecting click on write and image will be written to the micro-sd card. Just plug the micro-sd to raspberry pi and give power and it will boot on will show raspberry OS booting screen.
